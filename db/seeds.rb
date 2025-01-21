@@ -1,9 +1,19 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Create some users
+users = User.create!([
+  { email: "user1@example.com", password: "password", password_confirmation: "password" },
+  { email: "user2@example.com", password: "password", password_confirmation: "password" },
+  { email: "user3@example.com", password: "password", password_confirmation: "password" }
+])
+
+puts "Created #{users.count} users."
+
+# Create some articles
+articles = Article.create!([
+  { title: "How to Learn Ruby on Rails", body: "Start with the official Rails Guides. Practice regularly and build projects!", user: users.first },
+  { title: "Understanding MVC Architecture", body: "MVC stands for Model-View-Controller. It's a design pattern widely used in web development.", user: users.second },
+  { title: "10 Tips for Better Web Development", body: "Always write clean code, follow conventions, and test your applications!", user: users.third },
+  { title: "Why Devise is Great for Authentication", body: "Devise provides an easy and robust authentication system for Rails.", user: users.first },
+  { title: "Deploying a Rails App to Heroku", body: "Heroku is a great platform for deploying your Rails applications. Use it to quickly get your app live!", user: users.second }
+])
+
+puts "Created #{articles.count} articles."
